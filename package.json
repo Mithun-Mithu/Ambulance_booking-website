@@ -1,0 +1,23 @@
+{
+  "name": "ambulance-booking",
+  "version": "1.0.0",
+  "description": "Emergency Ambulance Booking System",
+  "main": "ambulance-backend.js",
+  "scripts": {
+    "start": "node ambulance-backend.js",
+    "dev": "nodemon ambulance-backend.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.1",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

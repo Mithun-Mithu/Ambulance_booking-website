@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚑 Emergency Ambulance Service</title>
+    <meta name="description" content="Fast, reliable emergency ambulance booking service">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚑</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🚑 Emergency Ambulance Service</h1>
+            <p>Fast, Reliable, Life-Saving Emergency Medical Transportation</p>
+            <button class="emergency-btn" onclick="emergencyCall()">🚨 EMERGENCY CALL</button>
+        </div>
+
+        <!-- Booking Form Section -->
+        <div class="booking-form">
+            <h2>📋 Book an Ambulance</h2>
+            <form id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">👤 Patient Name *</label>
+                        <input type="text" id="patientName" name="patientName" placeholder="Enter patient name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">📞 Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickupLocation">📍 Pickup Location *</label>
+                    <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter full address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">🏥 Destination Hospital *</label>
+                    <select id="destination" name="destination" required>
+                        <option value="">Select Hospital</option>
+                        <option value="city-hospital">🏥 City General Hospital</option>
+                        <option value="metro-medical">🏥 Metro Medical Center</option>
+                        <option value="emergency-care">🏥 Emergency Care Hospital</option>
+                        <option value="specialty-clinic">🏥 Specialty Medical Clinic</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="urgency">🚨 Urgency Level *</label>
+                        <select id="urgency" name="urgency" required>
+                            <option value="">Select Urgency</option>
+                            <option value="critical">🚨 Critical - Life Threatening</option>
+                            <option value="urgent">⚠️ Urgent - Needs Immediate Care</option>
+                            <option value="routine">📅 Routine - Non-Emergency</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ambulanceType">🚑 Ambulance Type</label>
+                        <select id="ambulanceType" name="ambulanceType">
+                            <option value="basic">🚐 Basic Life Support</option>
+                            <option value="advanced">🚑 Advanced Life Support</option>
+                            <option value="cardiac">❤️ Cardiac Ambulance</option>
+                            <option value="neonatal">👶 Neonatal Ambulance</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">📍 Book Ambulance Now</button>
+            </form>
+        </div>
+
+        <!-- Ambulance List Section -->
+        <div class="ambulance-list">
+            <div class="ambulance-header">
+                <h2>🚑 Available Ambulances</h2>
+                <button id="addAmbulanceBtn" class="btn add-btn" onclick="showAddAmbulanceForm()">➕ Add New Ambulance</button>
+            </div>
+            <div id="ambulanceCards"></div>
+        </div>
+
+        <!-- Add Ambulance Modal -->
+        <div id="addAmbulanceModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🚑 Add New Ambulance</h3>
+                    <span class="close" onclick="closeAddAmbulanceForm()">&times;</span>
+                </div>
+                <form id="addAmbulanceForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newDriverName">👨‍⚕️ Driver Name *</label>
+                            <input type="text" id="newDriverName" name="driverName" placeholder="Enter driver name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPhone">📞 Phone Number *</label>
+                            <input type="tel" id="newPhone" name="phone" placeholder="Enter phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newLocation">📍 Current Location *</label>
+                        <input type="text" id="newLocation" name="location" placeholder="Enter current location" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newAmbulanceType">🚑 Ambulance Type *</label>
+                            <select id="newAmbulanceType" name="type" required>
+                                <option value="">Select Type</option>
+                                <option value="Basic Life Support">🚐 Basic Life Support</option>
+                                <option value="Advanced Life Support">🚑 Advanced Life Support</option>
+                                <option value="Cardiac Ambulance">❤️ Cardiac Ambulance</option>
+                                <option value="Neonatal Ambulance">👶 Neonatal Ambulance</option>
+                                <option value="Speed Ambulance">🏃 Speed Ambulance</option>
+                                <option value="Ambari Ambulance">🚛 Ambari Ambulance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newETA">⏰ ETA (minutes)</label>
+                            <input type="number" id="newETA" name="eta" placeholder="e.g., 5" min="1" value="5">
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn cancel-btn" onclick="closeAddAmbulanceForm()">❌ Cancel</button>
+                        <button type="submit" class="btn">✅ Add Ambulance</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <h2>🗺️ Live Ambulance Tracking</h2>
+            <div id="map">
+                🗺️
+                <br>
+                <a href="https://www.google.com/maps/search/near+by+hospital/" target="_blank" style="color: #667eea; text-decoration: none;">
+                ➡️ Click on an ambulance to see real-time tracking
+                </a>
+            </div>
+        </div>
+
+        <!-- Booking Status Section -->
+        <div class="booking-status" id="bookingStatus">
+            <div class="status-icon">✅</div>
+            <h2>Booking Confirmed!</h2>
+            <p>Your ambulance has been dispatched and is on the way.</p>
+            <div id="trackingInfo"></div>
+            <button class="btn" onclick="resetBookingForm()">📋 Book Another Ambulance</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
